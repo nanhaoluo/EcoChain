@@ -183,14 +183,4 @@ npm test
 - 如合约开发受阻，改用伪链方案（前端 Mock 数据 + 阿里云区块链服务存证）
 - 本地存储积分数据，后续再同步上链
 
-## 联系与支持
-
-如有任何问题或需要技术支持，请联系：
-
-- 技术支持邮箱：support@ecochain.com
-- 项目文档：https://docs.ecochain.com
-- 问题追踪：https://github.com/ecochain/ecochain-uni/issues
-
----
-
-Copyright © 2025 EcoChain Team. All Rights Reserved.
+### 其实这就是个比赛的demo
