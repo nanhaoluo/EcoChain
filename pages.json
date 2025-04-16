@@ -1,0 +1,163 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "EcoChain",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/real-scan/real-scan",
+      "style": {
+        "navigationBarTitleText": "AR扫描",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/real-scan/result",
+      "style": {
+        "navigationBarTitleText": "识别结果",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/nft-market/nft-list",
+      "style": {
+        "navigationBarTitleText": "NFT市场",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/nft-market/nft-detail",
+      "style": {
+        "navigationBarTitleText": "NFT详情",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/recycle-map/map-container",
+      "style": {
+        "navigationBarTitleText": "回收站地图",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/recycle-map/navigation",
+      "style": {
+        "navigationBarTitleText": "导航",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/recycle-map/station-detail",
+      "style": {
+        "navigationBarTitleText": "回收站详情",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user/profile",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/webview/webview",
+      "style": {
+        "navigationBarTitleText": "网页",
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "EcoChain",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "backgroundColor": "#F5F5F5"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#4CAF50",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/icons/home.png",
+        "selectedIconPath": "static/icons/home-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/real-scan/real-scan",
+        "iconPath": "static/icons/scan.png",
+        "selectedIconPath": "static/icons/scan-active.png",
+        "text": "扫描"
+      },
+      {
+        "pagePath": "pages/nft-market/nft-list",
+        "iconPath": "static/icons/nft.png",
+        "selectedIconPath": "static/icons/nft-active.png",
+        "text": "NFT"
+      },
+      {
+        "pagePath": "pages/recycle-map/map-container",
+        "iconPath": "static/icons/map.png",
+        "selectedIconPath": "static/icons/map-active.png",
+        "text": "地图"
+      },
+      {
+        "pagePath": "pages/user/profile",
+        "iconPath": "static/icons/user.png",
+        "selectedIconPath": "static/icons/user-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "condition": {
+    "current": 0,
+    "list": [
+      {
+        "name": "首页",
+        "path": "pages/index/index"
+      },
+      {
+        "name": "AR扫描",
+        "path": "pages/real-scan/real-scan"
+      },
+      {
+        "name": "识别结果",
+        "path": "pages/real-scan/result"
+      },
+      {
+        "name": "NFT市场",
+        "path": "pages/nft-market/nft-list"
+      },
+      {
+        "name": "NFT详情",
+        "path": "pages/nft-market/nft-detail"
+      },
+      {
+        "name": "回收站地图",
+        "path": "pages/recycle-map/map-container"
+      },
+      {
+        "name": "导航",
+        "path": "pages/recycle-map/navigation"
+      },
+      {
+        "name": "回收站详情",
+        "path": "pages/recycle-map/station-detail"
+      },
+      {
+        "name": "个人中心",
+        "path": "pages/user/profile"
+      },
+      {
+        "name": "网页",
+        "path": "pages/webview/webview"
+      }
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+// 安卓构建配置文件
+// 用于配置AR模块的依赖和构建选项
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 33
+    
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+        
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        
+        // 启用 ARCore
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    
+    // 启用 Kotlin 支持
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    
+    // 启用 DataBinding
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    // Android 基础依赖
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    // AR 相关依赖
+    implementation 'com.google.ar:core:1.36.0'
+    implementation 'de.javagl:obj:0.3.0'
+    
+    // TensorFlow Lite 依赖
+    implementation 'org.tensorflow:tensorflow-lite:2.12.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.4.3'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.4.3'
+    
+    // 高德地图依赖
+    implementation 'com.amap.api:3dmap:9.5.0'
+    implementation 'com.amap.api:location:6.3.0'
+    implementation 'com.amap.api:search:9.5.0'
+    
+    // 测试依赖
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

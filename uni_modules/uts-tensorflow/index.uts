@@ -1,0 +1,113 @@
+/**
+ * UTS桥接文件
+ * 用于连接UniApp和原生TensorFlow Lite功能
+ */
+
+// 导入UTS类型
+import { UTSAndroid } from "io.dcloud.uts";
+
+/**
+ * TensorFlow Lite模型管理器
+ * 提供模型加载和推理功能
+ */
+export default class TensorFlowLiteManager {
+    // 原生TFLite实例
+    private tfLite: UTSAndroid.JavaObject;
+    
+    // 模型是否已加载
+    private modelLoaded: boolean = false;
+    
+    /**
+     * 构造函数
+     */
+    constructor() {
+        // 创建原生TFLite实例
+        this.tfLite = new UTSAndroid.JavaClass("com.ecochain.app.TFLite").newInstance();
+    }
+    
+    /**
+     * 加载模型
+     * @param modelPath 模型文件路径
+     * @returns 是否加载成功
+     */
+    async loadModel(modelPath: string): Promise<boolean> {
+        try {
+            console.log(`Loading TFLite model from ${modelPath}`);
+            
+            // 获取应用上下文
+            const context = UTSAndroid.getAppContext();
+            
+            // 调用原生方法初始化模型
+            this.tfLite.callMethod("init", context, modelPath);
+            
+            this.modelLoaded = true;
+            console.log("TFLite model loaded successfully");
+            return true;
+        } catch (error) {
+            console.error("Failed to load TFLite model:", error);
+            this.modelLoaded = false;
+            return false;
+        }
+    }
+    
+    /**
+     * 对图像进行分类
+     * @param imagePath 图像文件路径
+     * @returns 分类结果，包含标签和概率
+     */
+    async classifyImage(imagePath: string): Promise<Array<{label: string, probability: number}>> {
+        if (!this.modelLoaded) {
+            console.error("TFLite model not loaded");
+            throw new Error("Model not loaded");
+        }
+        
+        try {
+            console.log(`Classifying image: ${imagePath}`);
+            
+            // 加载图像
+            const bitmap = this.tfLite.callMethod("loadImageFromFile", imagePath) as UTSAndroid.JavaObject;
+            if (!bitmap) {
+                throw new Error("Failed to load image");
+            }
+            
+            // 执行分类
+            const resultMap = this.tfLite.callMethod("classify", bitmap) as UTSAndroid.JavaObject;
+            
+            // 将Java Map转换为JavaScript对象
+            const keySet = resultMap.callMethod("keySet") as UTSAndroid.JavaObject;
+            const iterator = keySet.callMethod("iterator") as UTSAndroid.JavaObject;
+            
+            const results: Array<{label: string, probability: number}> = [];
+            
+            while (iterator.callMethod("hasNext") as boolean) {
+                const key = iterator.callMethod("next") as string;
+                const value = resultMap.callMethod("get", key) as number;
+                
+                results.push({
+                    label: key,
+                    probability: value
+                });
+            }
+            
+            // 按概率排序
+            results.sort((a, b) => b.probability - a.probability);
+            
+            console.log("Classification results:", results);
+            return results;
+        } catch (error) {
+            console.error("Failed to classify image:", error);
+            throw error;
+        }
+    }
+    
+    /**
+     * 释放模型资源
+     */
+    dispose(): void {
+        if (this.tfLite) {
+            this.tfLite.callMethod("close");
+            this.modelLoaded = false;
+            console.log("TFLite model resources released");
+        }
+    }
+}
